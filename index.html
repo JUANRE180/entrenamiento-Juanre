@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECOLAB Training - Kitchen Products</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="app-header">
+        <div class="language-selector">
+            <img src="images/pizza mania.png" alt="Pizza Mania" class="header-logo logo-left">
+            <div class="header-center">
+                <h1 id="app-title">Guía de Productos ECOLAB</h1>
+                <button id="quiz-start-btn" class="quiz-btn">
+                    <span id="quiz-btn-text">¡Pon a prueba tu conocimiento!</span>
+                    <span class="rocket-icon">🚀</span>
+                </button>
+                <button class="btn-estudio" onclick="empezarModoEstudio()">📚 Modo Estudio (Fichas)</button>
+                <div class="lang-buttons">
+                    <button class="lang-btn active" data-lang="es"><img src="https://flagcdn.com/w20/es.png" alt="ES"
+                            class="lang-flag"> Español</button>
+                    <button class="lang-btn" data-lang="en"><img src="https://flagcdn.com/w20/us.png" alt="EN"
+                            class="lang-flag"> English</button>
+                    <button class="lang-btn" data-lang="th"><img src="https://flagcdn.com/w20/th.png" alt="TH"
+                            class="lang-flag"> ไทย</button>
+                    <button class="lang-btn" data-lang="my"><img src="https://flagcdn.com/w20/mm.png" alt="MM"
+                            class="lang-flag"> မြန်မာဘာသာ</button>
+                </div>
+            </div>
+            <img src="images/le lapin.png" alt="Le Lapin" class="header-logo logo-right">
+        </div>
+    </header>
+
+    <main class="container">
+        <div id="product-grid" class="product-grid">
+            <!-- Cards will be injected here by JS -->
+        </div>
+    </main>
+
+    <!-- Modal Container -->
+    <!-- Modal Container -->
+    <div id="product-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title" class="modal-title"></h2>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div id="modal-body" class="modal-body">
+                <!-- Content injected by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz Modal -->
+    <div id="quiz-modal" class="modal">
+        <div class="modal-content quiz-content">
+            <div class="modal-header quiz-header">
+                <h2 id="quiz-title">Examen de Seguridad</h2>
+                <button id="close-quiz" class="close-btn">&times;</button>
+            </div>
+            <div id="quiz-body" class="modal-body">
+                <div id="quiz-question-container">
+                    <div class="quiz-progress">Pregunta <span id="current-q">1</span> de <span id="total-q">10</span>
+                    </div>
+                    <div class="progress-container">
+                        <div id="quiz-progress-bar" class="progress-bar"></div>
+                    </div>
+                    <h3 id="question-text"></h3>
+                    <div id="options-container" class="options-grid">
+                        <!-- Options injected by JS -->
+                    </div>
+                </div>
+                <div id="quiz-results" class="quiz-results hidden">
+                    <div class="result-icon" id="result-icon">🎓</div>
+                    <h2 id="result-score"></h2>
+                    <p id="result-text"></p>
+                    <button id="restart-quiz" class="restart-btn">Intentar de nuevo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Estudio Modal (Flashcards) -->
+    <div id="estudio-modal" class="modal">
+        <div class="modal-content estudio-content">
+            <div class="modal-header">
+                <h2 id="estudio-title">📚 Modo Estudio</h2>
+                <button id="close-estudio" class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body estudio-body">
+                <div class="estudio-progress">
+                    <span id="estudio-counter">Ficha 1 de 162</span>
+                </div>
+
+                <div class="flashcard-container">
+                    <div id="flashcard" class="flashcard" onclick="girarTarjeta()">
+                        <div id="seccion-pregunta" class="seccion-pregunta">
+                            <h3 id="estudio-pregunta">Pregunta</h3>
+                            <div class="tap-hint">Haz clic para ver la respuesta 👆</div>
+                        </div>
+                        <div id="seccion-respuesta" class="seccion-respuesta" style="display:none;">
+                            <div class="respuesta-label">✅ Respuesta Correcta:</div>
+                            <p id="estudio-respuesta">Respuesta</p>
+                            <div class="tap-hint">Haz clic para volver a la pregunta 🔄</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="estudio-controls">
+                    <button onclick="anteriorFicha()" class="btn-nav">⬅️ Anterior</button>
+                    <button onclick="siguienteFicha()" class="btn-nav">Siguiente ➡️</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="quizData.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
