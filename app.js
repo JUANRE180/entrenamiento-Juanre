@@ -1,6 +1,6 @@
 const translations = {
     es: {
-        clickHint: "Doble clic para más info",
+        clickHint: "Toca para más info",
         title: "Guía Técnica ECOLAB",
         quizBtn: "¡Pon a prueba tu conocimiento!",
         quizTitleBase: "Examen de Seguridad",
@@ -344,7 +344,7 @@ const translations = {
         ]
     },
     en: {
-        clickHint: "Double click for more info",
+        clickHint: "Tap for more info",
         title: "ECOLAB Technical Guide",
         quizBtn: "Test your knowledge!",
         quizTitleBase: "Safety Exam",
@@ -688,7 +688,7 @@ const translations = {
         ]
     },
     th: {
-        clickHint: "ดับเบิ้ลคลิกเพื่อดูข้อมูลเพิ่มเติม",
+        clickHint: "แตะเพื่อดูข้อมูลเพิ่มเติม",
         title: "คู่มือเทคนิค ECOLAB",
         quizBtn: "ทดสอบความรู้ของคุณ!",
         quizTitleBase: "แบบทดสอบความปลอดภัย",
@@ -1031,7 +1031,7 @@ const translations = {
         ]
     },
     my: {
-        clickHint: "အချက်အလက်ပိုမိုသိရှိရန် နှိပ်ပါ (Double Click)",
+        clickHint: "အချက်အလက်ပိုမိုသိရှိရန် နှိပ်ပါ",
         title: "ECOLAB နည်းပညာလက်စွဲ",
         quizBtn: "သင်၏ အသိပညာကို စမ်းทပ်ပါ။ 🚀",
         quizTitleBase: "ဘေးကင်းရေး စာမေးပွဲ",
@@ -1458,7 +1458,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function render(lang) {
         titleEl.textContent = translations[lang].title;
         gridEl.innerHTML = '';
-        const clickHintText = translations[lang].clickHint || "Double click for more info";
+        const clickHintText = translations[lang].clickHint || "Tap for more info";
 
         translations[lang].products.forEach(product => {
             const card = document.createElement('div');
@@ -1490,8 +1490,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             `;
 
-            // Doble clic para abrir modal
-            card.addEventListener('dblclick', () => openModal(product));
+            // Un solo clic para abrir modal (mejor usabilidad en móvil)
+            card.addEventListener('click', () => openModal(product));
 
             gridEl.appendChild(card);
         });
