@@ -1403,7 +1403,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Mapeo de IDs de producto a archivos de video
         const videoFiles = {
-            'multi-quat': 'multi squat.mp4',
+            'multi-quat': 'multi-squat.mp4', // Corregido: guión en lugar de espacio para GitHub Pages
             'clean-soft': 'clean-soft.mp4',
             'future-dc': 'future-dc.mp4',
             'greasecutter': 'greasecutter.mp4',
