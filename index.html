@@ -66,7 +66,13 @@
             </div>
             <div id="quiz-body" class="modal-body">
                 <div id="quiz-question-container">
-                    <div class="quiz-progress">Pregunta <span id="current-q">1</span> de <span id="total-q">10</span>
+                    <div class="quiz-header-stats">
+                        <div class="quiz-progress">Pregunta <span id="current-q">1</span> de <span
+                                id="total-q">10</span></div>
+                        <div id="quiz-live-stats" class="quiz-live-stats">
+                            <span class="stat-check">✅ <span id="quiz-aciertos">0</span></span>
+                            <span class="stat-cross">❌ <span id="quiz-errores">0</span></span>
+                        </div>
                     </div>
                     <div class="progress-container">
                         <div id="quiz-progress-bar" class="progress-bar"></div>
@@ -80,7 +86,7 @@
                     <div class="result-icon" id="result-icon">🎓</div>
                     <h2 id="result-score"></h2>
                     <p id="result-text"></p>
-                    <button id="restart-quiz" class="restart-btn">Intentar de nuevo</button>
+                    <button id="restart-quiz" class="btn-volver-inicio">Volver al Inicio</button>
                 </div>
             </div>
         </div>

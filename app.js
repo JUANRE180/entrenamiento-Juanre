@@ -2,18 +2,19 @@ const translations = {
     es: {
         clickHint: "Toca para más info",
         title: "Guía Técnica ECOLAB",
-        quizBtn: "¡Pon a prueba tu conocimiento!",
+        quizBtn: "Examen 🎓",
         quizTitleBase: "Examen de Seguridad",
         quizQuestionLabel: "Pregunta",
         quizOf: "de",
         quizRestart: "Intentar de nuevo",
         productQuizBtn: "🎯 Test de Producto",
         returnToProduct: "Volver al Producto",
+        returnToStart: "Volver al Inicio",
         quizFeedbackCorrect: "¡Correcto! ✅",
         quizFeedbackIncorrect: "Incorrecto ❌",
-        quizResultExpert: "¡Eres un experto de Ecolab!",
-        quizResultGood: "¡Buen trabajo!",
-        quizResultStudy: "Necesitas repasar más",
+        quizResultExcellence: "¡Enhorabuena! 🌟 Has aprobado con excelencia. Eres un experto en Ecolab.",
+        quizResultGood: "Buen trabajo 👍, pero necesitas repasar un poco más para ser un experto.",
+        quizResultStudy: "¡Ánimo! 💪 Necesitas estudiar más las fichas técnicas antes de volver a intentarlo.",
         modalTitlePrefix: "Instrucciones para",
         quizQuestions: {
             purpose: "¿Para qué sirve el producto {name}?",
@@ -346,16 +347,17 @@ const translations = {
     en: {
         clickHint: "Tap for more info",
         title: "ECOLAB Technical Guide",
-        quizBtn: "Test your knowledge!",
+        quizBtn: "Exam 🎓",
         quizTitleBase: "Safety Exam",
         quizQuestionLabel: "Question",
         quizOf: "of",
         quizRestart: "Try Again",
         quizFeedbackCorrect: "Correct! ✅",
         quizFeedbackIncorrect: "Incorrect ❌",
-        quizResultExpert: "You are an Ecolab Expert!",
-        quizResultGood: "Good Job!",
-        quizResultStudy: "You need to study more",
+        quizResultExcellence: "Congratulations! 🌟 You have passed with excellence. You are an Ecolab expert.",
+        quizResultGood: "Good job 👍, but you need to review a bit more to be an expert.",
+        quizResultStudy: "Cheer up! 💪 You need to study the technical sheets more before trying again.",
+        returnToStart: "Return to Start",
         modalTitlePrefix: "Instructions for",
         quizQuestions: {
             purpose: "What is {name} used for?",
@@ -690,16 +692,17 @@ const translations = {
     th: {
         clickHint: "แตะเพื่อดูข้อมูลเพิ่มเติม",
         title: "คู่มือเทคนิค ECOLAB",
-        quizBtn: "ทดสอบความรู้ของคุณ!",
+        quizBtn: "สอบ 🎓",
         quizTitleBase: "แบบทดสอบความปลอดภัย",
         quizQuestionLabel: "คำถามที่",
         quizOf: "จาก",
         quizRestart: "ลองอีกครั้ง",
         quizFeedbackCorrect: "ถูกต้อง! ✅",
         quizFeedbackIncorrect: "ไม่ถูกต้อง ❌",
-        quizResultExpert: "คุณคือผู้เชี่ยวชาญของ Ecolab!",
-        quizResultGood: "ทำได้ดีมาก!",
-        quizResultStudy: "คุณต้องทบทวนเพิ่มเติม",
+        quizResultExcellence: "ขอแสดงความยินดี! 🌟 คุณผ่านการทดสอบด้วยคะแนนดีเยี่ยม คุณคือผู้เชี่ยวชาญของ Ecolab",
+        quizResultGood: "ทำได้ดีมาก 👍 แต่คุณต้องทบทวนอีกสักนิดเพื่อจะเป็นผู้เชี่ยวชาญ",
+        quizResultStudy: "สู้ๆ นะ! 💪 คุณต้องศึกษาเอกสารทางเทคนิคเพิ่มเติมก่อนที่จะลองอีกครั้ง",
+        returnToStart: "กลับสู่หน้าหลัก",
         modalTitlePrefix: "คำแนะนำสำหรับ",
         quizQuestions: {
             purpose: "ผลิตภัณฑ์ {name} ใช้สำหรับอะไร?",
@@ -1033,16 +1036,17 @@ const translations = {
     my: {
         clickHint: "အချက်အလက်ပိုမိုသိရှိရန် နှိပ်ပါ",
         title: "ECOLAB နည်းပညာလက်စွဲ",
-        quizBtn: "သင်၏ အသိပညာကို စမ်းทပ်ပါ။ 🚀",
-        quizTitleBase: "ဘေးကင်းရေး စာမေးပွဲ",
+        quizBtn: "စာမေးပွဲ 🎓",
+        quizTitleBase: "ဘေးကင်းရေး စစ်ဆေးမှု",
         quizQuestionLabel: "မေးခွန်း",
-        quizOf: "-",
+        quizOf: "၏",
         quizRestart: "ပြန်ကြိုးစားပါ",
         quizFeedbackCorrect: "မှန်ကန်သည်! ✅",
-        quizFeedbackIncorrect: "မှားယွင်းသည် ❌",
-        quizResultExpert: "သင်သည် Ecolab ကျွမ်းကျင်သူဖြစ်သည်!",
-        quizResultGood: "ကောင်းမွန်သော လုပ်ဆောင်ချက်!",
-        quizResultStudy: "ထပ်မံလေ့လာရန် လိုအပ်သည်",
+        quizFeedbackIncorrect: "မမှန်ပါ ❌",
+        quizResultExcellence: "ဂုဏ်ယူပါသည်! 🌟 သင်သည် ထူးချွန်စွာ အောင်မြင်ခဲ့ပါသည်။ သင်သည် Ecolab ကျွမ်းကျင်သူတစ်ဦး ဖြစ်ပါသည်။",
+        quizResultGood: "ကောင်းမွန်စွာ လုပ်ဆောင်နိုင်ခဲ့သည် 👍 သို့သော် ကျွမ်းကျင်သူဖြစ်ရန် အနည်းငယ် ထပ်မံ လေ့လာရန် လိုအပ်ပါသည်။",
+        quizResultStudy: "အားတင်းထားပါ! 💪 နောက်တစ်ကြိမ် မကြိုးစားမီ နည်းပညာဆိုင်ရာ အချက်အလက်များကို ပိုမို လေ့လာရန် လိုအပ်ပါသည်။",
+        returnToStart: "အစသို့ ပြန်သွားရန်",
         modalTitlePrefix: "လမ်းညွှန်ချက်များ",
         quizQuestions: {
             purpose: "{name} ကို ဘာအတွက် အသုံးပြုသလဲ?",
@@ -1567,6 +1571,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const progressBar = document.getElementById('quiz-progress-bar');
         if (progressBar) progressBar.style.width = '0%';
 
+        const aciertosEl = document.getElementById('quiz-aciertos');
+        const erroresEl = document.getElementById('quiz-errores');
+        if (aciertosEl) aciertosEl.textContent = '0';
+        if (erroresEl) erroresEl.textContent = '0';
+
         quizResultsEl.classList.add('hidden');
         quizQuestionContainer.classList.remove('hidden');
 
@@ -1706,6 +1715,12 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
+        // --- ACTUALIZAR CONTADORES PERSISTENTES ---
+        const aciertosEl = document.getElementById('quiz-aciertos');
+        const erroresEl = document.getElementById('quiz-errores');
+        if (aciertosEl) aciertosEl.textContent = score;
+        if (erroresEl) erroresEl.textContent = currentQuestionIndex + 1 - score;
+
         setTimeout(() => {
             currentQuestionIndex++;
             if (currentQuestionIndex < currentQuestions.length) showQuestion();
@@ -1718,7 +1733,13 @@ document.addEventListener('DOMContentLoaded', () => {
         quizResultsEl.classList.remove('hidden');
         resultScoreEl.textContent = `${score} / ${currentQuestions.length}`;
         const langData = translations[idiomaSeleccionado];
-        restartQuizBtn.textContent = langData.quizRestart;
+
+        // Botón Volver al Inicio (especificado por el usuario)
+        restartQuizBtn.textContent = langData.returnToStart || "Volver al Inicio";
+        restartQuizBtn.onclick = () => {
+            quizModal.classList.remove('active');
+            limpiarEstado();
+        };
 
         // Remove old back button
         const oldBackBtn = quizResultsEl.querySelector('.back-to-product-btn');
@@ -1737,15 +1758,16 @@ document.addEventListener('DOMContentLoaded', () => {
             quizResultsEl.appendChild(backBtn);
         }
 
-        if (score === currentQuestions.length) {
-            resultTextEl.textContent = langData.quizResultExpert;
-            resultIconEl.textContent = '🏆';
-        } else if (score >= currentQuestions.length * 0.6) {
+        // Lógica de mensajes según puntuación (Specs finales)
+        if (score >= 17) {
+            resultTextEl.textContent = langData.quizResultExcellence;
+            resultIconEl.textContent = '🌟';
+        } else if (score >= 14) {
             resultTextEl.textContent = langData.quizResultGood;
-            resultIconEl.textContent = '✅';
+            resultIconEl.textContent = '👍';
         } else {
             resultTextEl.textContent = langData.quizResultStudy;
-            resultIconEl.textContent = '📚';
+            resultIconEl.textContent = '💪';
         }
     }
 
