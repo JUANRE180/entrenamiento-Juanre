@@ -153,7 +153,37 @@ body {
 
 @media (max-width: 768px) {
     .header-logo {
-        height: 80px;
+        height: 120px;
+        /* Incrementado de 80px para mejor visibilidad */
+        margin-top: 10px;
+    }
+
+    .product-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .card-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+
+    .product-name {
+        font-size: 1.3rem;
+    }
+
+    .product-image-container {
+        height: auto;
+        min-height: 250px;
+        padding: 2rem;
+    }
+
+    .product-image {
+        width: 90%;
+        max-width: 300px;
+        height: auto;
+        aspect-ratio: auto;
     }
 
     .lang-buttons {
