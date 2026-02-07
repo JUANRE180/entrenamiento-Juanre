@@ -99,12 +99,16 @@
                 </div>
 
                 <div class="flashcard-container">
-                    <div id="flashcard" class="flashcard" onclick="girarTarjeta()">
+                    <div id="flashcard" class="flashcard">
                         <div id="seccion-pregunta" class="seccion-pregunta">
                             <h3 id="estudio-pregunta">Pregunta</h3>
-                            <div class="tap-hint">Haz clic para ver la respuesta 👆</div>
+                            <div id="estudio-opciones" class="estudio-opciones">
+                                <!-- Opciones inyectadas por JS -->
+                            </div>
+                            <div class="tap-hint">Elige una respuesta 👆</div>
                         </div>
-                        <div id="seccion-respuesta" class="seccion-respuesta" style="display:none;">
+                        <div id="seccion-respuesta" class="seccion-respuesta" style="display:none;"
+                            onclick="girarTarjeta()">
                             <div class="respuesta-label">✅ Respuesta Correcta:</div>
                             <p id="estudio-respuesta">Respuesta</p>
                             <div class="tap-hint">Haz clic para volver a la pregunta 🔄</div>

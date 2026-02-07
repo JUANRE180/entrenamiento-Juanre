@@ -1017,6 +1017,36 @@ body {
     font-size: 1.2rem;
     text-transform: uppercase;
     letter-spacing: 1px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.estudio-stats {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    background: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    box-shadow: var(--shadow-sm);
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.2rem;
+}
+
+.stat-check {
+    color: #28a745;
+}
+
+.stat-cross {
+    color: #d32f2f;
 }
 
 /* Flashcard Container */
@@ -1144,12 +1174,74 @@ body {
 }
 
 .tap-hint {
-    position: absolute;
-    bottom: 1.5rem;
+    margin-top: 1.5rem;
     font-size: 0.85rem;
     color: #90a4ae;
     font-weight: 600;
     font-style: italic;
+}
+
+.estudio-opciones {
+    width: 100%;
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.estudio-option-btn {
+    width: 100%;
+    padding: 12px 15px;
+    background: #f8f9fa;
+    border: 2px solid #eaedf0;
+    border-radius: 12px;
+    font-family: var(--font-main);
+    font-size: 1rem;
+    font-weight: 600;
+    color: #455a64;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.estudio-option-btn:hover:not(:disabled) {
+    background: #e3f2fd;
+    border-color: #039be5;
+    transform: translateX(5px);
+}
+
+.estudio-option-btn.selected-correct {
+    background-color: #e8f5e9;
+    border-color: #4caf50;
+    color: #2e7d32;
+}
+
+.estudio-option-btn.selected-incorrect {
+    background-color: #ffebee;
+    border-color: #f44336;
+    color: #c62828;
+}
+
+.estudio-option-btn:disabled {
+    cursor: default;
+    opacity: 0.8;
+}
+
+.estudio-finished {
+    text-align: center;
+    padding: 3rem 2rem;
+}
+
+.finished-icon {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+}
+
+.finished-stats {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin: 1.5rem 0;
+    color: #263238;
 }
 
 .estudio-controls {

@@ -1781,84 +1781,154 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // --- MODO ESTUDIO (FLASHCARDS) ---
+let poolEstudio = [];
 let indiceEstudio = 0;
-let mostrandoRespuesta = false;
+let aciertosEstudio = 0;
+let erroresEstudio = 0;
+let respondidoActual = false;
 
 function empezarModoEstudio() {
+    // 1. Crear copia aleatoria de las 162 preguntas (aleatorio y sin repeticiones)
+    poolEstudio = [...preguntasEcolab];
+
+    // Función shuffle interna si no está accesible globalmente
+    for (let i = poolEstudio.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [poolEstudio[i], poolEstudio[j]] = [poolEstudio[j], poolEstudio[i]];
+    }
+
+    // 2. Reiniciar contadores
     indiceEstudio = 0;
-    mostrandoRespuesta = false;
-    document.getElementById('estudio-modal').classList.add('active');
+    aciertosEstudio = 0;
+    erroresEstudio = 0;
+    respondidoActual = false;
+
+    // 3. Preparar Interfaz
+    const estudioModal = document.getElementById('estudio-modal');
+    estudioModal.classList.add('active');
+
+    // Asegurar que los controles de navegación estén visibles
+    document.querySelector('.estudio-controls').style.display = 'flex';
+    document.getElementById('flashcard').style.display = 'block';
+
     mostrarFicha();
 }
 
 function mostrarFicha() {
-    const q = preguntasEcolab[indiceEstudio];
-    const total = preguntasEcolab.length;
+    const container = document.getElementById('seccion-pregunta');
+    const optionsEl = document.getElementById('estudio-opciones');
+    const counterEl = document.getElementById('estudio-counter');
     const currentLang = document.documentElement.lang || 'es';
 
-    // Actualizar contador
-    document.getElementById('estudio-counter').textContent =
-        (currentLang === 'es' ? 'Ficha ' :
-            currentLang === 'th' ? 'แผ่นที่ ' :
-                currentLang === 'my' ? 'ကတ်အမှတ် ' : 'Flashcard ') +
-        (indiceEstudio + 1) + ' ' +
-        (currentLang === 'es' ? 'de' :
-            currentLang === 'th' ? 'จาก' :
-                currentLang === 'my' ? '၏' : 'of') + ' ' + total;
+    // Limpiar estado visual previo
+    container.classList.remove('hidden');
+    document.getElementById('seccion-respuesta').style.display = 'none';
+    document.getElementById('seccion-pregunta').style.display = 'flex';
+    respondidoActual = false;
 
-    // Actualizar contenido
-    document.getElementById('estudio-pregunta').textContent = q.pregunta[currentLang];
-    document.getElementById('estudio-respuesta').textContent = q.respuestaCorrecta[currentLang];
-
-    // Aplicar color según el producto
-    const flashcard = document.getElementById('flashcard');
-    // Limpiar clases anteriores
-    flashcard.className = 'flashcard';
-
-    // Mapeo de productos a colores
-    const producto = q.producto.toUpperCase();
-    if (producto.includes('22 MULTI-QUAT') || producto.includes('MULTI-QUAT')) {
-        flashcard.classList.add('producto-red');
-    } else if (producto.includes('FUTURE') || producto.includes('FLOOR')) {
-        flashcard.classList.add('producto-orange');
-    } else if (producto.includes('LIME')) {
-        flashcard.classList.add('producto-green');
-    } else if (producto.includes('GREASE')) {
-        flashcard.classList.add('producto-brown');
-    } else if (producto.includes('MIRAGLO')) {
-        flashcard.classList.add('producto-blue');
-    } else if (producto.includes('CLEAN') || producto.includes('SOFT')) {
-        flashcard.classList.add('producto-dark-blue');
-    } else if (producto.includes('MEDALLION')) {
-        flashcard.classList.add('producto-blue');
-    } else {
-        flashcard.classList.add('producto-blue'); // Color por defecto
+    // Verificar si hemos terminado
+    if (indiceEstudio >= poolEstudio.length) {
+        mostrarEstudioFinalizado();
+        return;
     }
 
-    // REGLA DE ORO: Ocultar la respuesta siempre al cargar una ficha nueva
-    document.getElementById('seccion-respuesta').style.display = 'none';
-    document.getElementById('seccion-pregunta').style.display = 'block';
-    mostrandoRespuesta = false;
+    const q = poolEstudio[indiceEstudio];
+
+    // 1. Actualizar Contador Principal y Estadísticas (Aciertos/Errores)
+    const labelFicha = { es: 'Ficha', en: 'Flashcard', th: 'แผ่นที่', my: 'ကတ်အမှတ်' }[currentLang] || 'Flashcard';
+    const labelDe = { es: 'de', en: 'of', th: 'จาก', my: '၏' }[currentLang] || 'of';
+
+    counterEl.innerHTML = `
+        <div>${labelFicha} ${indiceEstudio + 1} ${labelDe} ${poolEstudio.length}</div>
+        <div class="estudio-stats">
+            <span class="stat-item stat-check">✅ ${aciertosEstudio}</span>
+            <span class="stat-item stat-cross">❌ ${erroresEstudio}</span>
+        </div>
+    `;
+
+    // 2. Cargar Pregunta
+    document.getElementById('estudio-pregunta').textContent = q.pregunta[currentLang] || q.pregunta['en'];
+    document.getElementById('estudio-respuesta').textContent = q.respuestaCorrecta[currentLang] || q.respuestaCorrecta['en'];
+
+    // 3. Cargar Opciones Interactivas
+    optionsEl.innerHTML = '';
+    const opts = q.opciones[currentLang] || q.opciones['en'];
+    const corr = q.respuestaCorrecta[currentLang] || q.respuestaCorrecta['en'];
+
+    opts.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'estudio-option-btn';
+        btn.textContent = opt;
+        btn.onclick = (e) => {
+            e.stopPropagation();
+            if (!respondidoActual) verificarRespuestaEstudio(opt === corr, btn);
+        };
+        optionsEl.appendChild(btn);
+    });
+
+    // 4. Color según producto
+    const flashcard = document.getElementById('flashcard');
+    flashcard.className = 'flashcard';
+    const prod = q.producto.toUpperCase();
+    if (prod.includes('22')) flashcard.classList.add('producto-red');
+    else if (prod.includes('FUTURE') || prod.includes('FLOOR')) flashcard.classList.add('producto-orange');
+    else if (prod.includes('LIME')) flashcard.classList.add('producto-green');
+    else if (prod.includes('GREASE')) flashcard.classList.add('producto-brown');
+    else if (prod.includes('MIRAGLO')) flashcard.classList.add('producto-blue');
+    else if (prod.includes('CLEAN') || prod.includes('SOFT')) flashcard.classList.add('producto-dark-blue');
+    else flashcard.classList.add('producto-blue');
+}
+
+function verificarRespuestaEstudio(esCorrecto, btn) {
+    if (respondidoActual) return;
+    respondidoActual = true;
+
+    if (esCorrecto) {
+        aciertosEstudio++;
+        btn.classList.add('selected-correct');
+    } else {
+        erroresEstudio++;
+        btn.classList.add('selected-incorrect');
+    }
+
+    // Actualizar los contadores visualmente sin refrescar toda la ficha
+    const statsContainer = document.querySelector('.estudio-stats');
+    if (statsContainer) {
+        statsContainer.innerHTML = `
+            <span class="stat-item stat-check">✅ ${aciertosEstudio}</span>
+            <span class="stat-item stat-cross">❌ ${erroresEstudio}</span>
+        `;
+    }
+
+    // Deshabilitar otros botones
+    const buttons = document.querySelectorAll('.estudio-option-btn');
+    buttons.forEach(b => b.disabled = true);
+
+    // Girar la tarjeta tras un pequeño delay para ver el feedback
+    setTimeout(() => {
+        girarTarjeta();
+    }, 600);
 }
 
 function girarTarjeta() {
     const seccionPregunta = document.getElementById('seccion-pregunta');
     const seccionRespuesta = document.getElementById('seccion-respuesta');
 
-    if (!mostrandoRespuesta) {
+    if (seccionRespuesta.style.display === 'none') {
         seccionPregunta.style.display = 'none';
-        seccionRespuesta.style.display = 'block';
-        mostrandoRespuesta = true;
+        seccionRespuesta.style.display = 'flex';
     } else {
-        seccionPregunta.style.display = 'block';
+        seccionPregunta.style.display = 'flex';
         seccionRespuesta.style.display = 'none';
-        mostrandoRespuesta = false;
     }
 }
 
 function siguienteFicha() {
-    if (indiceEstudio < preguntasEcolab.length - 1) {
+    if (indiceEstudio < poolEstudio.length - 1) {
         indiceEstudio++;
+        mostrarFicha();
+    } else {
+        indiceEstudio++; // Forzar estado de finalización
         mostrarFicha();
     }
 }
@@ -1870,7 +1940,40 @@ function anteriorFicha() {
     }
 }
 
-// Cerrar Modo Estudio
+function mostrarEstudioFinalizado() {
+    const counterEl = document.getElementById('estudio-counter');
+    const flashcard = document.getElementById('flashcard');
+    const controls = document.querySelector('.estudio-controls');
+    const lang = document.documentElement.lang || 'es';
+
+    const msgs = {
+        es: { title: '¡Estudio Terminado!', restart: 'Reiniciar Sesión', stats: 'Resultado Final' },
+        en: { title: 'Study Finished!', restart: 'Restart Session', stats: 'Final Result' },
+        th: { title: 'จบการศึกษาแล้ว!', restart: 'เริ่มเซสชันใหม่', stats: 'ผลลัพธ์สุดท้าย' },
+        my: { title: 'လေ့လာမှု ပြီးဆုံးပါပြီ!', restart: 'ပြန်စပါ', stats: 'နောက်ဆုံးရလဒ်' }
+    }[lang] || msgs.en;
+
+    counterEl.innerHTML = `<h2>${msgs.title}</h2>`;
+    controls.style.display = 'none';
+
+    flashcard.innerHTML = `
+        <div class="estudio-finished">
+            <div class="finished-icon">🎓</div>
+            <div class="finished-stats">${msgs.stats}:</div>
+            <div class="estudio-stats">
+                <span class="stat-item stat-check">✅ ${aciertosEstudio}</span>
+                <span class="stat-item stat-cross">❌ ${erroresEstudio}</span>
+            </div>
+            <button onclick="empezarModoEstudio()" class="training-quiz-btn" style="margin-top:2rem">
+                ${msgs.restart}
+            </button>
+        </div>
+    `;
+}
+
+// Event Listeners
 document.getElementById('close-estudio').addEventListener('click', () => {
     document.getElementById('estudio-modal').classList.remove('active');
+    // Restaurar contenido original por si se reinicia sin llamar a empezarModoEstudio
+    location.reload(); // Forma más segura de limpiar el DOM inyectado del flashcard
 });
